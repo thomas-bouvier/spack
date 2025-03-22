@@ -19,6 +19,9 @@ class PyFlashAttn(PythonPackage):
     license("BSD")
 
     version("main", branch="main")
+    version(
+        "2.7.4.post1", sha256="f03485c9a49a4d68d0733acdcad80ab0e72afa025a777fdc2966ceccf9d51765"
+    )
     version("2.6.3", sha256="5bfae9500ad8e7d2937ebccb4906f3bc464d1bf66eedd0e4adabd520811c7b52")
     version(
         "2.5.9.post1", sha256="a92db1683a5b141a0f4371d251ae9f73e9aef629b3a58a50d0ef430266c68782"
@@ -39,15 +42,20 @@ class PyFlashAttn(PythonPackage):
         depends_on("ninja")
 
     with default_args(type=("build", "run")):
-        depends_on("py-torch+cuda")
+        depends_on("python@3.7:", when="@:2.5")
+
+        depends_on("python@3.8:", when="@2.6:")
+        depends_on("py-torch@2: +cuda", when="@2.6:")
+
+        depends_on("python@3.9:", when="@2.7.1:")
+        depends_on("py-torch@2.1: +cuda", when="@2.7:")
+        depends_on("py-torch@2.2: +cuda", when="@2.7.4.post1:")
+
         depends_on("py-einops")
         depends_on("py-triton")
 
     with default_args(type=("build", "link", "run")):
         depends_on("py-pybind11")
-
-    depends_on("python@3.7:", type=("build", "run"), when="@:2.5")
-    depends_on("python@3.8:", type=("build", "run"), when="@2.6:")
 
     def setup_build_environment(self, env):
         # If oom error, try lowering the number of jobs with `spack install -j`
