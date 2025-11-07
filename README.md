@@ -66,6 +66,9 @@ source spack/share/spack/setup-env.csh
 
 # For fish
 . spack/share/spack/setup-env.fish
+
+# For Nix
+nix-shell spack/share/spack/shell.nix
 ```
 
 ```bash
