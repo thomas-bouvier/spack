@@ -29,7 +29,7 @@ stdenv.mkDerivation {
     # Build tools
     bash
     file
-    #gmake
+    gnumake
     gnupatch
     ccache
 
@@ -47,8 +47,7 @@ stdenv.mkDerivation {
 
     # Undocumented dependencies
     python3Packages.certifi
-
-    gcc
+    coreutils
   ];
 
   name = "spack-shell";
@@ -57,5 +56,6 @@ stdenv.mkDerivation {
     spack bootstrap disable github-actions-v0.6
     spack bootstrap disable github-actions-v0.5
     spack bootstrap enable spack-install
+    spack external find
   '';
 }
