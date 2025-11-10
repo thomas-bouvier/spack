@@ -42,7 +42,8 @@ def get_user():
         # user pwd for unix systems
         import pwd
 
-        return pwd.getpwuid(os.geteuid()).pw_name
+        #return pwd.getpwuid(os.geteuid()).pw_name
+        return getpass.getuser()
     except ImportError:
         # fallback on getpass
         return getpass.getuser()
