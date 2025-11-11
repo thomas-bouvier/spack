@@ -45,6 +45,10 @@ stdenv.mkDerivation {
     gnupg
     patchelf
 
+    # Fortran compiler not exposed by standard environment
+    gfortran
+    gfortran.cc.lib
+
     # Undocumented dependencies
     python3Packages.certifi
     coreutils
