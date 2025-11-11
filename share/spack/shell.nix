@@ -60,6 +60,8 @@ stdenv.mkDerivation {
     spack bootstrap disable github-actions-v0.6
     spack bootstrap disable github-actions-v0.5
     spack bootstrap enable spack-install
-    spack external find
+
+    export TMPDIR=$(pwd)/nix/tmp
+    mkdir -p "$TMPDIR"
   '';
 }
