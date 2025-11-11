@@ -50,8 +50,13 @@ stdenv.mkDerivation {
     gfortran.cc.lib
 
     # Undocumented dependencies
-    python3Packages.certifi
     coreutils
+
+    # Debug
+    which
+    cmake # system curl not found when compiling cmake via Spack
+    vim
+    python3Packages.certifi
   ];
 
   name = "spack-shell";
