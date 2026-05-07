@@ -2838,6 +2838,8 @@ class PackageInstaller:
     def _install_policy(self, dag_hash: str, is_root: bool) -> InstallPolicy:
         if dag_hash in self.build_graph.force_source:
             return "source_only"
+        if dag_hash in self.overwrite:
+            return "source_only"
         policy = self.root_policy if is_root else self.dependencies_policy
         if policy == "auto" and not self.include_build_deps:
             return "cache_only"
